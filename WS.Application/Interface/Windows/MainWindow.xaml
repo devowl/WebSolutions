@@ -1,0 +1,15 @@
+﻿<Window x:Class="WS.Application.Interface.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WS.Application"
+        xmlns:resources="clr-namespace:WS.Presentation.Resources;assembly=WS.Presentation"
+        xmlns:regions="http://www.codeplex.com/CompositeWPF"
+        xmlns:constants="clr-namespace:WS.Presentation.Prism;assembly=WS.Presentation"
+        mc:Ignorable="d"
+        Title="{x:Static resources:AppResources.ApplicationName}" Height="450" Width="800">
+    <Grid>
+        <ContentControl regions:RegionManager.RegionName="{x:Static constants:RegionNames.MainRegion}" />
+    </Grid>
+</Window>
