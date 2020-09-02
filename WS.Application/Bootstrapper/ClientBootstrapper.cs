@@ -7,9 +7,10 @@ using Microsoft.Practices.Prism.Logging;
 
 using Prism.AutofacExtension;
 
-using WS.Application.Interface.Windows;
 using WS.Network;
 using WS.Presentation;
+using WS.Presentation.Interface.Windows;
+using WS.Shared;
 using WS.Shared.Logger;
 
 namespace WS.Application.Bootstrapper
@@ -35,9 +36,12 @@ namespace WS.Application.Bootstrapper
         protected override void ConfigureContainer(ContainerBuilder builder)
         {
             base.ConfigureContainer(builder);
+
+            // TODO вынести для конфигурации в файл config
             builder.RegisterModule<NetworkModule>();
             builder.RegisterModule<PresentationModule>();
             builder.RegisterModule<ApplicationModule>();
+            builder.RegisterModule<SharedModule>();
         }
 
         /// <inheritdoc/>

@@ -1,16 +1,42 @@
-﻿<Window x:Class="WS.Presentation.Interface.Windows.ChooseCountryWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WS.Presentation.Interface.Windows"
-        xmlns:resources="clr-namespace:WS.Presentation.Resources"
-        mc:Ignorable="d"
-        Title="{x:Static resources:AppResources.ChooseCountryWindowName}" SizeToContent="WidthAndHeight">
+﻿<Window
+    x:Class="WS.Presentation.Interface.Windows.ChooseCountryWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:countries="clr-namespace:WS.Shared.Countries;assembly=WS.Shared"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WS.Presentation.Interface.Windows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:WS.Presentation.Resources"
+    xmlns:viewModels="clr-namespace:WS.Presentation.Interface.ViewModels"
+    xmlns:wpf="clr-namespace:FamFamFam.Flags.Wpf;assembly=FamFamFam.Flags.Wpf"
+    Title="{x:Static resources:AppResources.ChooseCountryWindowName}"
+    d:DataContext="{d:DesignInstance viewModels:ChooseCountryWindowViewModel}"
+    Width="250"
+    Height="500"
+    mc:Ignorable="d">
     <Window.Resources>
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <wpf:CountryIdToFlagImageSourceConverter x:Key="CountryIdToFlagImageSourceConverter" />
+            <DataTemplate x:Key="FlagCellTemplate">
+                <Image
+                    d:DataContext="{d:DesignInstance countries:Country}"
+                    Source="{Binding FlagCode, Converter={StaticResource CountryIdToFlagImageSourceConverter}}"
+                    Style="{StaticResource FlagImageStyle}" />
+            </DataTemplate>
+        </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <ListView />
-    </Grid>
+    <DockPanel>
+        <Button Command="{Binding AcceptChoose}" DockPanel.Dock="Bottom" Content="OK" Margin="20,5"/>
+        <ListView ItemsSource="{Binding AllCountries}" SelectedItem="{Binding SelectedCountry}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn CellTemplate="{StaticResource FlagCellTemplate}" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Страна" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </DockPanel>
 </Window>

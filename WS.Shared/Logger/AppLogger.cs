@@ -10,7 +10,7 @@ namespace WS.Shared.Logger
     /// </summary>
     internal class AppLogger : ILogger
     {
-        private static readonly ILog Logger = LogManager.GetLogger("VPNLogger"); 
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(object)); 
 
         static AppLogger()
         {

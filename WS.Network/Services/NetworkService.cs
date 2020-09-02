@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Threading;
+using System.Threading.Tasks;
 
+using WS.Shared.Countries;
 using WS.Shared.Network;
 
 namespace WS.Network.Services
@@ -19,18 +20,39 @@ namespace WS.Network.Services
         }
 
         /// <inheritdoc/>
-        public ConnectionStatus Status { get; }
+        public event EventHandler<StatusChangeArgs> StatusChanged;
 
         /// <inheritdoc/>
-        public void Connect()
+        public ConnectionStatus Status { get; private set; }
+
+        /// <summary>
+        /// User country.
+        /// </summary>
+        public Country CurrentCountry { get; private set; }
+
+        /// <inheritdoc/>
+        public void SetCountry(Country userCountry)
         {
-            Thread.Sleep(5000);
+            CurrentCountry = userCountry;
+        }
+
+        /// <inheritdoc/>
+        public async Task Connect()
+        {
+            ChangeStatus(ConnectionStatus.Connecting);
+            await Task.Delay(5000);
+            ChangeStatus(ConnectionStatus.Disconnected);
         }
 
         /// <inheritdoc/>
         public void Disconnect()
         {
+        }
 
+        private void ChangeStatus(ConnectionStatus status)
+        {
+            Status = status;
+            StatusChanged?.Invoke(this, new StatusChangeArgs(status));
         }
     }
 }

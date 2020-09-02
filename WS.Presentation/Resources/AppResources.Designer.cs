@@ -70,11 +70,29 @@ namespace WS.Presentation.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Страна.
+        /// </summary>
+        public static string ChooseCountryMenu {
+            get {
+                return ResourceManager.GetString("ChooseCountryMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выберите страну.
         /// </summary>
         public static string ChooseCountryWindowName {
             get {
                 return ResourceManager.GetString("ChooseCountryWindowName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подключиться.
+        /// </summary>
+        public static string ConnectionButton {
+            get {
+                return ResourceManager.GetString("ConnectionButton", resourceCulture);
             }
         }
     }

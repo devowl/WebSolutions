@@ -1,5 +1,6 @@
 ﻿using Autofac;
 
+using WS.Presentation.Prism;
 using WS.Shared.Autofac;
 
 namespace WS.Presentation
@@ -13,6 +14,7 @@ namespace WS.Presentation
         protected override void Load(ContainerBuilder builder)
         {
             builder.ModuleViewRegistration();
+            builder.RegisterType<LocalNavigator>().SingleInstance();
         }
     }
 }

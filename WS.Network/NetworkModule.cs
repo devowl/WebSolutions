@@ -1,5 +1,7 @@
 ﻿using Autofac;
 
+using WS.Network.Services;
+
 namespace WS.Network
 {
     /// <summary>
@@ -10,7 +12,7 @@ namespace WS.Network
         /// <inheritdoc/>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<NetworkModule>().AsImplementedInterfaces().PropertiesAutowired();
+            builder.RegisterType<NetworkService>().AsImplementedInterfaces().SingleInstance().PropertiesAutowired();
         }
     }
 }
